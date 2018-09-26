@@ -12,16 +12,19 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(743, 400)
+        Dialog.resize(743, 411)
         self.gridLayout = QtWidgets.QGridLayout(Dialog)
         self.gridLayout.setObjectName("gridLayout")
         self.pushButtonTrim = QtWidgets.QPushButton(Dialog)
+        self.pushButtonTrim.setEnabled(False)
         self.pushButtonTrim.setObjectName("pushButtonTrim")
         self.gridLayout.addWidget(self.pushButtonTrim, 6, 4, 1, 1)
         self.pushButtonCopy = QtWidgets.QPushButton(Dialog)
+        self.pushButtonCopy.setEnabled(False)
         self.pushButtonCopy.setObjectName("pushButtonCopy")
         self.gridLayout.addWidget(self.pushButtonCopy, 0, 4, 1, 1)
         self.pushButtonRestore = QtWidgets.QPushButton(Dialog)
+        self.pushButtonRestore.setEnabled(False)
         self.pushButtonRestore.setObjectName("pushButtonRestore")
         self.gridLayout.addWidget(self.pushButtonRestore, 1, 4, 1, 1)
         self.pushButtonClose = QtWidgets.QPushButton(Dialog)
@@ -30,20 +33,10 @@ class Ui_Dialog(object):
         self.labelTrim = QtWidgets.QLabel(Dialog)
         self.labelTrim.setObjectName("labelTrim")
         self.gridLayout.addWidget(self.labelTrim, 6, 0, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, 
-                                           QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout.addItem(spacerItem, 5, 1, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, 
-                                            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem1, 1, 2, 1, 2)
-        self.listWidget = QtWidgets.QListWidget(Dialog)
-        sizePolicy =  QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding,QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(10)
-        sizePolicy.setVerticalStretch(10)
-        sizePolicy.setHeightForWidth(self.listWidget.sizePolicy().hasHeightForWidth())
-        self.listWidget.setSizePolicy(sizePolicy)
-        self.listWidget.setObjectName("listWidget")
-        self.gridLayout.addWidget(self.listWidget, 0, 0, 6, 3)
         self.checkBoxAlphabetize = QtWidgets.QCheckBox(Dialog)
         self.checkBoxAlphabetize.setObjectName("checkBoxAlphabetize")
         self.gridLayout.addWidget(self.checkBoxAlphabetize, 2, 4, 1, 1)
@@ -55,11 +48,15 @@ class Ui_Dialog(object):
         self.lineEditTrim.setSizePolicy(sizePolicy)
         self.lineEditTrim.setObjectName("lineEditTrim")
         self.gridLayout.addWidget(self.lineEditTrim, 6, 1, 1, 2)
+        self.listWidget = QtWidgets.QListWidget(Dialog)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(10)
+        sizePolicy.setVerticalStretch(10)
+        sizePolicy.setHeightForWidth(self.listWidget.sizePolicy().hasHeightForWidth())
+        self.listWidget.setSizePolicy(sizePolicy)
+        self.listWidget.setObjectName("listWidget")
+        self.gridLayout.addWidget(self.listWidget, 0, 0, 5, 3)
         self.labelTrim.setBuddy(self.lineEditTrim)
-        
-        self.pushButtonCopy.setEnabled(False)
-        self.pushButtonTrim.setEnabled(False)
-        self.pushButtonRestore.setEnabled(False)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -71,6 +68,9 @@ class Ui_Dialog(object):
         Dialog.setTabOrder(self.checkBoxAlphabetize, self.lineEditTrim)
         Dialog.setTabOrder(self.lineEditTrim, self.pushButtonTrim)
         Dialog.setTabOrder(self.pushButtonTrim, self.pushButtonClose)
+
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
         
         # hook up signals (widget outputs) and slots (class member methods)
         self.pushButtonClose.clicked.connect(self.close)
@@ -86,18 +86,18 @@ class Ui_Dialog(object):
         # member variables
         self.historyFileName = ''
         self.unsortedList = []
+        
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Command History"))
-        self.pushButtonTrim.setText(_translate("Dialog", "&Trim List"))
+        self.pushButtonTrim.setText(_translate("Dialog", "Trim &List"))
         self.pushButtonCopy.setText(_translate("Dialog", 
                                                "Copy\n&Selection\nto\nClipboard"))
         self.pushButtonRestore.setText(_translate("Dialog", "&Restore\nHistory"))
         self.pushButtonClose.setText(_translate("Dialog", "&Close"))
-        self.labelTrim.setText(_translate("Dialog", "Trim"))
-        self.checkBoxAlphabetize.setText(_translate("Dialog", "&Alphabetize"))
-
+        self.labelTrim.setText(_translate("Dialog", "&Trim"))
+        self.checkBoxAlphabetize.setText(_translate("Dialog", "&Alphabetized"))
 
     def clearListBox(self):         # remove all items from listWidget
         while self.listWidget.count() > 0:
@@ -125,7 +125,7 @@ class Ui_Dialog(object):
         if strToMatch != '':
             linesToRetain = []
             for line in self.unsortedList:
-                if line.__contains__(strToMatch):
+                if line.decode('utf-8').__contains__(strToMatch):
                     linesToRetain.append(line)
             self.clearListBox()
             self.unsortedList = []

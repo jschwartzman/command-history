@@ -17,6 +17,9 @@
   <layout class="QGridLayout" name="gridLayout">
    <item row="6" column="4">
     <widget class="QPushButton" name="pushButtonTrim">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>Trim &amp;List</string>
      </property>
@@ -24,6 +27,9 @@
    </item>
    <item row="0" column="4">
     <widget class="QPushButton" name="pushButtonCopy">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>Copy
 &amp;Selection
@@ -34,6 +40,9 @@ Clipboard</string>
    </item>
    <item row="1" column="4">
     <widget class="QPushButton" name="pushButtonRestore">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>&amp;Restore
 History</string>
