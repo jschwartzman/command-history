@@ -129,7 +129,7 @@ class Ui_Dialog(object):
                     linesToRetain.append(line)
             self.clearListBox()
             self.unsortedList = []
-            for line in linesToRetain:
+            for line in linesToRetain:    # already in newest to oldest order
                 self.unsortedList.append(line)
                 self.listWidget.addItem(line)
             self.checkAndChangeSorting()
@@ -166,7 +166,7 @@ class Ui_Dialog(object):
         for line in lines:
             if line not in newLines:
                 newLines.append(line)
-        for line in newLines:
+        for line in reversed(newLines):     # newest to oldest order
             if line.__contains__(text):
                 self.unsortedList.append(line)
                 self.listWidget.addItem(line)
