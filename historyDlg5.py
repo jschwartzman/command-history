@@ -100,7 +100,7 @@ class Ui_Dialog(object):
                                                       QtCore.Qt.CaseSensitive | 
                                                       QtCore.Qt.MatchRecursive)
             self.clearListBox()
-            for line in linesToRetain:
+            for line in linesToRetain:    # already in newest to oldest order
                 self.listWidget.addItem(line)
                 
     def restoreHistory(self):   # restore the entire history (less duplicates)
@@ -115,7 +115,7 @@ class Ui_Dialog(object):
         for line in lines:
             if line not in newLines:
                 newLines.append(line)
-        for line in newLines:
+        for line in reversed(newLines):     # newest to oldest order
             if line.__contains__(text):
                 self.listWidget.addItem(line)
         fd.close()
