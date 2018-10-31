@@ -155,7 +155,7 @@ class Ui_Dialog(object):
         if self.checkBoxAlphabetize.checkState() == QtCore.Qt.Unchecked:
             self.listWidget.setSortingEnabled(False)
             self.clearListBox()
-            for line in reversed(self.unsortedList):    # newest to oldest order
+            for line in self.unsortedList:    # newest to oldest order
                 self.listWidget.addItem(line)
         else:
             self.listWidget.setSortingEnabled(True)
