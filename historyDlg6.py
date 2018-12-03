@@ -69,9 +69,6 @@ class Ui_Dialog(object):
         Dialog.setTabOrder(self.lineEditTrim, self.pushButtonTrim)
         Dialog.setTabOrder(self.pushButtonTrim, self.pushButtonClose)
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
-        
         # hook up signals (widget outputs) and slots (class member methods)
         self.pushButtonClose.clicked.connect(self.close)
         self.pushButtonCopy.clicked.connect(self.copyText)
