@@ -127,7 +127,7 @@ class Ui_Dialog(object):
         if strToMatch != '':
             linesToRetain = []
             for line in self.unsortedList:
-                if line.decode('utf-8').__contains__(strToMatch):
+                if line.__contains__(strToMatch):
                     linesToRetain.append(line)
             self.clearListBox()
             self.unsortedList = []
