@@ -2,6 +2,8 @@ This repository contains three small python programs that search your bash comma
 
 In order to copy commands to the system clipboard, you must have a system clipboard manager installed on your system.
 
+This project is documented in the January 2019 issue of Linux Format Magazine (LXF245)
+
 Created by:  
 John Schwartzman
 john@fortesystem.com
